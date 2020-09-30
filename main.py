@@ -2,17 +2,20 @@ import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager 
 from webdriver_manager.firefox import GeckoDriverManager
+import getpass
+import keyboard #pip install keyboard
 
 # Initiliaze Webdriver
 try:
 	driver = webdriver.Chrome(ChromeDriverManager().install())
+	# Else Try this driver = webdriver.Chrome(executable_path="") Downloaded from https://chromedriver.chromium.org/downloads
 except:
 	driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
 
 def FacebookLogin():
     #Enter Your Email ID And Password
 	user=input('Enter Email Id:')  
-	password=input('Enter Password:')
+	password= getpass('Enter Password:')
 
 	#Opening Facebook.
 	driver.get('https://www.facebook.com/') 
@@ -35,9 +38,10 @@ def FacebookLogin():
 
 	  
 	print ("Done") 
-	input('Press anything to quit') 
-	driver.quit() 
-	print("Finished")
+	closing = input('Press anything to quit')
+	if key.is_pressed('esc'):
+		driver.quit() 
+		print("Finished")
 
 FacebookLogin()
 
